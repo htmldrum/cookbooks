@@ -1,4 +1,4 @@
-ops
+cookbooks
 ===
 
 Chef and other CI resurces
