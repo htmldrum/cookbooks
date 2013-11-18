@@ -1,0 +1,6 @@
+[submodule "apache2"]
+	path = apache2
+	url = https://github.com/opscode-cookbooks/apache2.git
+[submodule "cron"]
+	path = cron
+	url = https://github.com/opscode-cookbooks/cron.git
