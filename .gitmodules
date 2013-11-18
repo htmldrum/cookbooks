@@ -4,3 +4,9 @@
 [submodule "cron"]
 	path = cron
 	url = https://github.com/opscode-cookbooks/cron.git
+[submodule "apt"]
+	path = apt
+	url = https://github.com/opscode-cookbooks/apt
+[submodule "jenkins"]
+	path = jenkins
+	url = https://github.com/opscode-cookbooks/jenkins.git
