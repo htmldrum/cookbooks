@@ -66,7 +66,6 @@ case node[:platform]
   node.set['mysql']['server']['packages'] = %w{mysql55-server}
   node.set['mysql']['client']['packages'] = %w{mysql55}
   
-  include_recipe "php"
 
   when "debian"
     include_recipe "apt"
@@ -78,5 +77,4 @@ case node[:platform]
 		action :add
 	end
 	
-	  include_recipe "php"
   end
