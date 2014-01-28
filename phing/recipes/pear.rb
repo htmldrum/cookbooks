@@ -7,7 +7,7 @@
 # Licensed under MIT:
 # http://raw.github.com/r8/php-phing/master/LICENSE.txt
 
-#include_recipe "php"
+include_recipe "php"
 
 # If phing version is a preferred state, 
 # get the latest version of that state
