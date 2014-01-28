@@ -1,7 +1,3 @@
-# Berksfile
-
 site :opscode
 
 metadata
-
-cookbook "php55-cookbook", github: "aporat/php55-cookbook"
