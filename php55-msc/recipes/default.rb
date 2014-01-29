@@ -21,7 +21,7 @@ execute "updateapt"  do
 end
 
 execute "installpy"  do
-	command "sudo apt-get install python-software-properties"
+	command "sudo apt-get -y install python-software-properties"
 	action :run
 end
 
@@ -31,6 +31,6 @@ execute "updateapttwo"  do
 end
 
 execute "installphp55"  do
-	command "sudo apt-get install php5"
+	command "sudo apt-get -y install php5"
 	action :run
 end
