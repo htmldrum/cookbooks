@@ -16,8 +16,6 @@
 # limitations under the License.
 #
 
-depends "apt"
-
 case node[:platform]
     
     when "amazon"
@@ -80,7 +78,7 @@ case node[:platform]
 	end
 
  when "ubuntu"
-    include_recipe "apt"
+    #include_recipe "apt"
 
     execute "python-software-properties" do 
       command "apt-get install -y python-software-properties"
