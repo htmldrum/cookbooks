@@ -76,8 +76,6 @@ case node[:platform]
 		key "http://www.dotdeb.org/dotdeb.gpg"
 		action :add
 	end
-	
-  end
 
  when "ubuntu"
     include_recipe "apt"
@@ -98,3 +96,5 @@ case node[:platform]
       command "service apache2 restart"
       action :run
     end
+
+ end
