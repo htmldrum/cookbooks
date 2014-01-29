@@ -16,6 +16,8 @@
 # limitations under the License.
 #
 
+depends "apt"
+
 case node[:platform]
     
     when "amazon"
