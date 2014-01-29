@@ -10,27 +10,27 @@
 #
 
 
-execute do
+execute "addapt" do
 	command "sudo add-apt-repository ppa:ondrej/php5"
 	action :run
 end
 
-execute do
+execute "updateapt"  do
 	command "sudo apt-get update"
 	action :run
 end
 
-execute do
+execute "installpy"  do
 	command "sudo apt-get install python-software-properties"
 	action :run
 end
 
-execute do
+execute "updateapttwo"  do
 	command "sudo apt-get update"
 	action :run
 end
 
-execute do
+execute "installphp55"  do
 	command "sudo apt-get install php5"
 	action :run
 end
