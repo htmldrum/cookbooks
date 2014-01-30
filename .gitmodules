@@ -10,3 +10,6 @@
 [submodule "jenkins"]
 	path = jenkins
 	url = https://github.com/opscode-cookbooks/jenkins.git
+[submodule "mshanken-cookbooks-managewine"]
+	path = mshanken-cookbooks-managewine
+	url = git@github.com:mshanken/mshanken-cookbooks-managewine.git
