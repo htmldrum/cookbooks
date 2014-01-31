@@ -31,6 +31,6 @@ execute "updateapttwo"  do
 end
 
 execute "installphp55"  do
-	command "sudo apt-get -y install php5"
+	command "sudo apt-get -y install php5 apache2"
 	action :run
 end
