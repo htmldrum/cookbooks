@@ -1,0 +1,16 @@
+{
+  "name": "mshanken_host",
+  "default_attributes": {
+  },
+  "json_class": "Chef::Role",
+  "env_run_lists": {
+    "production": ["role[mshanken_host_production]"],
+    "qa": ["role[mshanken_host_qa]"],
+    "dev": ["role[mshanken_host_dev]"]
+    },
+  "run_list": [ "role[base]", "recipe[apache]" ],
+  "description": "The webserver role",
+  "chef_type": "role",
+  "override_attributes": {
+  }
+}
