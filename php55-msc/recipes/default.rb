@@ -31,6 +31,6 @@ execute "updateapttwo"  do
 end
 
 execute "installphp55"  do
-	command "sudo apt-get -y install php5 php5-gd apache2 beanstalkd"
+	command "sudo apt-get -y install php5 php5-gd apache2 beanstalkd php5-curl php5-oauth php5-memcache php5-pgsql php5-xdebug"
 	action :run
 end
