@@ -1,0 +1,13 @@
+{
+  "name": "mshanken_host",
+  "default_attributes": {
+  },
+  "json_class": "Chef::Role",
+  "env_run_lists": {
+  },
+  "run_list": ["users::sysadmins"],
+  "description": "The webserver role",
+  "chef_type": "role",
+  "override_attributes": {
+  }
+}

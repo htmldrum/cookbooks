@@ -13,3 +13,9 @@
 [submodule "mshanken-clients-managewine"]
 	path = mshanken-clients-managewine
 	url = git@github.com:mshanken/mshanken-clients-managewine.git
+[submodule "users"]
+	path = users
+	url = https://github.com/opscode-cookbooks/users.git
+[submodule "chef-solo-search"]
+	path = chef-solo-search
+	url = https://github.com/edelight/chef-solo-search.git
