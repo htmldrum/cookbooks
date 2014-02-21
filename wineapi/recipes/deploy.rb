@@ -3,9 +3,11 @@ git "/var/www/wineapi/" do
   repository "git@github.com:mshanken/winedb-api.git"
   revision "devstable"
   action :sync
+  enable_submodules
   user "root"
   group "root"
 end
+
 
 
 # Creates log and cache dirs for the Kohana project.
