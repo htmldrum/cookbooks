@@ -10,11 +10,15 @@
 include_recipe "apt"
 include_recipe "php"
 
-package "curl" do
+#package "curl" do
+#  action :install
+#end
+
+package "apache2" do 
   action :install
 end
 
-package "apache2" do 
+package "libapache2-mod-php5" do
   action :install
 end
 
@@ -36,6 +40,10 @@ end
 
 package "php5-memcache" do
   action :install
+end
+
+service "apache2" do
+  action :restart
 end
 
 package "sphinxsearch" do
@@ -83,9 +91,19 @@ ac = php_pear_channel "pear.amazonwebservices.com" do
   action :discover
 end
 
+gc = php_pear_channel "guzzlephp.org/pear" do
+  action :discover
+end
+
+#php_pear "Guzzle" do
+#  channel gc.channel_name
+#  package_name "Guzzle"
+#  action :install
+#end
+
 php_pear "aws/sdk" do
   channel ac.channel_name
   package_name "sdk"
-  version "1.5.5"
+  #version "1.5.5"
   action :install
 end
