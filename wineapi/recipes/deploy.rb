@@ -3,7 +3,7 @@ git "/var/www/wineapi/" do
   repository "git@github.com:mshanken/winedb-api.git"
   revision "devstable"
   action :sync
-  enable_submodules
+  enable_submodules true
   user "root"
   group "root"
 end
