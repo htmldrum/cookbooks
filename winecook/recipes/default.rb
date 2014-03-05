@@ -9,6 +9,7 @@
 #
 include_recipe "apt"
 include_recipe "php"
+include_recipe "composer"
 
 #package "curl" do
 #  action :install
@@ -83,17 +84,24 @@ php_pear "symfony" do
   action :install
 end
 
-php_pear_channel "pear.symfony.com" do
-  action :discover
+composer_project "/var/www" do
+  dev false
+  quiet true
+  action :install
 end
 
-ac = php_pear_channel "pear.amazonwebservices.com" do
-  action :discover
-end
 
-gc = php_pear_channel "guzzlephp.org/pear" do
-  action :discover
-end
+#php_pear_channel "pear.symfony.com" do
+#  action :discover
+#end
+
+#ac = php_pear_channel "pear.amazonwebservices.com" do
+#  action :discover
+#end
+
+#gc = php_pear_channel "guzzlephp.org/pear" do
+#  action :discover
+#end
 
 #php_pear "Guzzle" do
 #  channel gc.channel_name
@@ -101,9 +109,9 @@ end
 #  action :install
 #end
 
-php_pear "aws/sdk" do
-  channel ac.channel_name
-  package_name "sdk"
-  #version "1.5.5"
-  action :install
-end
+#php_pear "aws/sdk" do
+#  channel ac.channel_name
+#  package_name "sdk"
+#  version "1.5.5"
+#  action :install
+#end
