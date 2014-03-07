@@ -10,6 +10,7 @@
 include_recipe "apt"
 include_recipe "php"
 include_recipe "composer"
+include_recipe "apache2"
 
 #package "curl" do
 #  action :install
@@ -55,6 +56,10 @@ package "memcached" do
   action :install
 end
 
+package "php-apc" do
+  action :install
+end
+
 package "build-essential" do
   action :install
 end
@@ -84,24 +89,24 @@ php_pear "symfony" do
   action :install
 end
 
-composer_project "/var/www" do
-  dev false
-  quiet true
-  action :install
+#composer_project "/var/www" do
+#  dev false
+#  quiet true
+#  action :install
+#end
+
+
+php_pear_channel "pear.symfony.com" do
+  action :discover
 end
 
+ac = php_pear_channel "pear.amazonwebservices.com" do
+  action :discover
+end
 
-#php_pear_channel "pear.symfony.com" do
-#  action :discover
-#end
-
-#ac = php_pear_channel "pear.amazonwebservices.com" do
-#  action :discover
-#end
-
-#gc = php_pear_channel "guzzlephp.org/pear" do
-#  action :discover
-#end
+gc = php_pear_channel "guzzlephp.org/pear" do
+  action :discover
+end
 
 #php_pear "Guzzle" do
 #  channel gc.channel_name
@@ -109,9 +114,25 @@ end
 #  action :install
 #end
 
-#php_pear "aws/sdk" do
-#  channel ac.channel_name
-#  package_name "sdk"
-#  version "1.5.5"
-#  action :install
-#end
+php_pear "aws/sdk" do
+  channel ac.channel_name
+  package_name "sdk"
+  version "1.5.5"
+  action :install
+end
+
+remote_file "Copy aws config  file" do
+  path "/usr/share/php/AWSSDKforPHP/config.inc.php"
+  source "file:///var/www/data/config.inc.php"
+  owner 'root'
+  group 'root'
+  mode 0755
+end
+
+web_app "default" do
+  cookbook "wsocook"
+  template "default.erb"
+  server_name "33.33.33.10"
+  server_aliases ["localhost:8888"]
+  docroot "/var/www/web"
+end
