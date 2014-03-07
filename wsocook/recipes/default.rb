@@ -130,7 +130,7 @@ remote_file "Copy aws config  file" do
 end
 
 web_app "default" do
-  cookbook "winecook"
+  cookbook "wsocook"
   template "default.erb"
   server_name "33.33.33.10"
   server_aliases ["localhost:8888"]
