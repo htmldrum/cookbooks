@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: winecook
+# Cookbook Name:: wsocook
 # Recipe:: default
 #
 # Copyright (C) 2014 M. Shanken Communications
@@ -9,7 +9,6 @@
 #
 include_recipe "apt"
 include_recipe "php"
-include_recipe "composer"
 include_recipe "apache2"
 
 #package "curl" do
