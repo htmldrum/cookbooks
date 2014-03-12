@@ -131,7 +131,36 @@ end
 web_app "default" do
   cookbook "wsocook"
   template "default.erb"
-  server_name "33.33.33.10"
+  server_name "localhost:8888"
   server_aliases ["localhost:8888"]
   docroot "/var/www/web"
+end
+
+directory "/var/www/cache" do
+  mode 0777
+  action :create
+end
+
+directory "/var/www/log" do
+  mode 0777
+  action :create
+end
+
+directory "/var/www/content-cache" do
+  mode 0777
+  action :create
+end
+
+bash "touch content_cache.lock" do
+  code <<-EOH
+  touch content_cache.lock
+  chmod 777 content_cache.lock
+  EOH
+end
+
+bash "fix symfony permissions" do
+  code <<-EOH
+  cd /var/www
+  symfony fix-perms
+  EOH
 end
