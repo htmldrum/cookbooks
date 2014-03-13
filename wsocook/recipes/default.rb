@@ -15,6 +15,10 @@ include_recipe "apache2"
 #  action :install
 #end
 
+package "git-core" do
+  action :install
+end
+
 package "apache2" do 
   action :install
 end
