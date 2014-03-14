@@ -9,81 +9,30 @@
 #
 include_recipe "apt"
 include_recipe "php"
-include_recipe "apache2"
 
-#package "curl" do
-#  action :install
-#end
-
-package "git-core" do
-  action :install
+%w{git-core apache2 libapache2-mod-php5 php5 php5-mysql php5-curl php-pear php5-memcache sphinxsearch memcached php-apc build-essential}.each do |pkg|
+ package pkg do
+   action :install
+ end
 end
 
-package "apache2" do 
-  action :install
-end
-
-package "libapache2-mod-php5" do
-  action :install
-end
-
-package "php5" do
-  action :install
-end
-
-package "php5-mysql" do
-  action :install
-end
-
-package "php5-curl" do
-  action :install
-end
-
-package "php-pear" do
-  action :install
-end
-
-package "php5-memcache" do
-  action :install
+execute "a2enmod rewrite" do
+   command "sudo a2enmod rewrite"
 end
 
 service "apache2" do
   action :restart
 end
 
-package "sphinxsearch" do
-  action :install
-end
-
-package "memcached" do
-  action :install
-end
-
-package "php-apc" do
-  action :install
-end
-
-package "build-essential" do
-  action :install
-end
-
 sc = php_pear_channel "pear.symfony-project.com" do
  action :discover
 end
 
-php_pear "EventDispatcher" do
-  channel sc.channel_name
-  action :install
-end
-
-php_pear "pake" do
-  channel sc.channel_name
-  action :install
-end
-
-php_pear "YAML" do
- channel sc.channel_name
- action :install
+%w{EventDispatcher pake YAML}.each do |pear|
+  php_pear pear do
+    channel sc.channel_name
+    action :install
+  end
 end
 
 php_pear "symfony" do
@@ -91,13 +40,6 @@ php_pear "symfony" do
   version "1.0.22"
   action :install
 end
-
-#composer_project "/var/www" do
-#  dev false
-#  quiet true
-#  action :install
-#end
-
 
 php_pear_channel "pear.symfony.com" do
   action :discover
@@ -132,27 +74,22 @@ remote_file "Copy aws config  file" do
   mode 0755
 end
 
-web_app "default" do
-  cookbook "wsocook"
-  template "default.erb"
-  server_name "localhost:8888"
-  server_aliases ["localhost:8888"]
-  docroot "/var/www/web"
+template "/etc/apache2/sites-enabled/default" do
+  source "default.erb"
 end
+#web_app "default" do
+#  cookbook "wsocook"
+#  template "default.erb"
+#  server_name "localhost:8888"
+#  server_aliases ["localhost:8888"]
+#  docroot "/var/www/web"
+#end
 
-directory "/var/www/cache" do
-  mode 0777
-  action :create
-end
-
-directory "/var/www/log" do
-  mode 0777
-  action :create
-end
-
-directory "/var/www/content-cache" do
-  mode 0777
-  action :create
+%w{/var/www/cache /var/www/log /var/www/content-cache}.each do |mkdir|
+  directory mkdir do
+    mode 0777
+    action :create
+  end
 end
 
 bash "touch content_cache.lock" do
