@@ -4,8 +4,8 @@ git "/var/www/identity/" do
   revision "devstable"
   action :sync
   enable_submodules true
-  user "www-data"
-  group "www-data"
+  user "root"
+  group "root"
 end
 
 
