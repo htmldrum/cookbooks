@@ -20,6 +20,17 @@ execute "a2enmod rewrite" do
    command "sudo a2enmod rewrite"
 end
 
+template "/etc/apache2/sites-enabled/default" do
+  source "default.erb"
+end
+#web_app "default" do
+#  cookbook "wsocook"
+#  template "default.erb"
+#  server_name "localhost:8888"
+#  server_aliases ["localhost:8888"]
+#  docroot "/var/www/web"
+#end
+
 service "apache2" do
   action :restart
 end
@@ -64,44 +75,4 @@ php_pear "aws/sdk" do
   package_name "sdk"
   version "1.5.5"
   action :install
-end
-
-remote_file "Copy aws config  file" do
-  path "/usr/share/php/AWSSDKforPHP/config.inc.php"
-  source "file:///var/www/data/config.inc.php"
-  owner 'root'
-  group 'root'
-  mode 0755
-end
-
-template "/etc/apache2/sites-enabled/default" do
-  source "default.erb"
-end
-#web_app "default" do
-#  cookbook "wsocook"
-#  template "default.erb"
-#  server_name "localhost:8888"
-#  server_aliases ["localhost:8888"]
-#  docroot "/var/www/web"
-#end
-
-%w{/var/www/cache /var/www/log /var/www/content-cache}.each do |mkdir|
-  directory mkdir do
-    mode 0777
-    action :create
-  end
-end
-
-bash "touch content_cache.lock" do
-  code <<-EOH
-  touch content_cache.lock
-  chmod 777 content_cache.lock
-  EOH
-end
-
-bash "fix symfony permissions" do
-  code <<-EOH
-  cd /var/www
-  symfony fix-perms
-  EOH
 end

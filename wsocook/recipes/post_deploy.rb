@@ -1,0 +1,28 @@
+remote_file "Copy aws config  file" do
+  path "/usr/share/php/AWSSDKforPHP/config.inc.php"
+  source "file:///var/www/data/config.inc.php"
+  owner 'root'
+  group 'root'
+  mode 0755
+end
+
+%w{/var/www/cache /var/www/log /var/www/content-cache}.each do |mkdir|
+  directory mkdir do
+    mode 0777
+    action :create
+  end
+end
+
+bash "touch content_cache.lock" do
+  code <<-EOH
+  touch content_cache.lock
+  chmod 777 content_cache.lock
+  EOH
+end
+
+bash "fix symfony permissions" do
+  code <<-EOH
+  cd /var/www
+  symfony fix-perms
+  EOH
+end
