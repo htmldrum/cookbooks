@@ -26,3 +26,7 @@ bash "fix symfony permissions" do
   symfony fix-perms
   EOH
 end
+
+service "apache2" do
+  action :restart
+end

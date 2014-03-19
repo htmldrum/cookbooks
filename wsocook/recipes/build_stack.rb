@@ -20,21 +20,6 @@ execute "a2enmod rewrite" do
    command "sudo a2enmod rewrite"
 end
 
-template "/etc/apache2/sites-enabled/default" do
-  source "default.erb"
-end
-#web_app "default" do
-#  cookbook "wsocook"
-#  template "default.erb"
-#  server_name "localhost:8888"
-#  server_aliases ["localhost:8888"]
-#  docroot "/var/www/web"
-#end
-
-service "apache2" do
-  action :restart
-end
-
 sc = php_pear_channel "pear.symfony-project.com" do
  action :discover
 end
