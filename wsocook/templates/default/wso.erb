@@ -1,0 +1,46 @@
+<VirtualHost *:80>
+  ServerName localhost:8888
+  ServerAlias localhost:8888
+  DocumentRoot /var/www/web
+  Alias /sf /usr/share/php/data/symfony/web/sf
+  Alias /contentimage /Image_Store
+  Alias /Wine/Images/Graphics /Image_Store/wso
+  RewriteEngine On
+
+  <Directory /var/www/web>
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  <Directory />
+    Options FollowSymLinks
+    AllowOverride None
+  </Directory>
+
+  <Location /server-status>
+    SetHandler server-status
+
+    Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1
+  </Location>
+
+  LogLevel info
+  ErrorLog /var/log/apache2/default-error.log
+  CustomLog /var/log/apache2/default-access.log combined
+
+  RewriteEngine On
+  RewriteLog /var/log/apache2/default-rewrite.log
+  RewriteLogLevel 0
+
+  # Canonical host, localhost:8888
+  RewriteCond %{HTTP_HOST}   !^localhost:8888 [NC]
+  RewriteCond %{HTTP_HOST}   !^$
+  RewriteRule ^/(.*)$        http://localhost:8888/$1 [L,R=301]
+
+  RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
+  RewriteCond %{SCRIPT_FILENAME} !maintenance.html
+  RewriteRule ^.*$ /system/maintenance.html [L]
+</VirtualHost>
