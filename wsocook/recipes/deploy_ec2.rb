@@ -1,4 +1,4 @@
-git "/var/www/wineapi/" do
+git "/var/www/" do
   repository "git@github.com:mturro/wso.git"
   revision "wsocook"
   action :sync
