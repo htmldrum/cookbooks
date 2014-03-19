@@ -10,7 +10,7 @@ git "/var/www/wso/" do
   group "root"
 end
 
-remote_file "Copy aws config  file" do
+remote_file "aws_config" do
   path "/usr/share/php/AWSSDKforPHP/config.inc.php"
   source "file:///var/www/data/config.inc.php"
   owner 'root'
