@@ -1,8 +1,8 @@
-template "/etc/apache2/sites-enabled/default" do
+template "/etc/apache2/sites-enabled/wso" do
   source "wso.erb"
 end
 
-git "/var/www/" do
+git "/var/www/wso/" do
   repository "git@github.com:mturro/wso.git"
   revision "wsocook"
   action :sync

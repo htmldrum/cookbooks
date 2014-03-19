@@ -1,7 +1,5 @@
 <VirtualHost *:80>
-  ServerName localhost:8888
-  ServerAlias localhost:8888
-  DocumentRoot /var/www/web
+  DocumentRoot /var/www/wso/web
   Alias /sf /usr/share/php/data/symfony/web/sf
   Alias /contentimage /Image_Store
   Alias /Wine/Images/Graphics /Image_Store/wso
@@ -28,17 +26,17 @@
   </Location>
 
   LogLevel info
-  ErrorLog /var/log/apache2/default-error.log
-  CustomLog /var/log/apache2/default-access.log combined
+  ErrorLog /var/log/apache2/wso-error.log
+  CustomLog /var/log/apache2/wso-access.log combined
 
   RewriteEngine On
-  RewriteLog /var/log/apache2/default-rewrite.log
+  RewriteLog /var/log/apache2/wso-rewrite.log
   RewriteLogLevel 0
 
-  # Canonical host, localhost:8888
-  RewriteCond %{HTTP_HOST}   !^localhost:8888 [NC]
+  # Canonical host,
+  RewriteCond %{HTTP_HOST}   !^ [NC]
   RewriteCond %{HTTP_HOST}   !^$
-  RewriteRule ^/(.*)$        http://localhost:8888/$1 [L,R=301]
+  RewriteRule ^/(.*)$        /$1 [L,R=301]
 
   RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
   RewriteCond %{SCRIPT_FILENAME} !maintenance.html
