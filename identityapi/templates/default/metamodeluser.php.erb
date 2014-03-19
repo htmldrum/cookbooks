@@ -1,0 +1,21 @@
+<?php defined('SYSPATH') or die('No direct access allowed.');
+
+return array
+(
+    'oauth' => array(
+        'allow_http' => true,
+        'cache_host' => 'localhost',
+        'cache_port' => 11211,
+        'api_name' => 'identity',
+        'nonce_time_limit' => 60,
+    ),
+    'test' => array(
+        'oauth_domain' => 'https://ysilbermintz.id-dev.newdev.mshanken.com',
+        'consumer_key' => 'f7819790-fe08-4083-99f0-1650cfab85c0',
+        'consumer_secret' => 'P8u4vDv6F8gHGCV1eh44odjodOZWYGSE',
+        'user_email' => 'phpunit@phpunit.com',
+        'user_password' => 'OkaZ$od@%1#L7Q',
+        'cookie_path' => '/tmp/curlcookie',
+    ),
+);
+
