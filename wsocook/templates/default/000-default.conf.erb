@@ -1,0 +1,44 @@
+<VirtualHost *:80>
+  DocumentRoot /var/www/wso/web
+  Alias /sf /usr/share/php/data/symfony/web/sf
+  Alias /contentimage /Image_Store
+  Alias /Wine/Images/Graphics /Image_Store/wso
+  RewriteEngine On
+
+  <Directory /var/www/web>
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  <Directory />
+    Options FollowSymLinks
+    AllowOverride None
+  </Directory>
+
+  <Location /server-status>
+    SetHandler server-status
+
+    Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1
+  </Location>
+
+  LogLevel info
+  ErrorLog /var/log/apache2/wso-error.log
+  CustomLog /var/log/apache2/wso-access.log combined
+
+  RewriteEngine On
+  RewriteLog /var/log/apache2/wso-rewrite.log
+  RewriteLogLevel 0
+
+  # Canonical host,
+  RewriteCond %{HTTP_HOST}   !^ [NC]
+  RewriteCond %{HTTP_HOST}   !^$
+  RewriteRule ^/(.*)$        /$1 [L,R=301]
+
+  RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
+  RewriteCond %{SCRIPT_FILENAME} !maintenance.html
+  RewriteRule ^.*$ /system/maintenance.html [L]
+</VirtualHost>
