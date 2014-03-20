@@ -2,7 +2,7 @@ template "/etc/apache2/sites-enabled/000-default" do
   source "000-default.conf.erb"
   owner "root"
   group "root"
-  mode 644
+  mode "644"
 end
 
 git "/var/www/wso/" do
