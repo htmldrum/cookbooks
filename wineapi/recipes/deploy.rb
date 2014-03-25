@@ -1,7 +1,7 @@
 # Deploys the given git project to the deploy directory.
 git "/var/www/wineapi/" do
   repository "git@github.com:mshanken/winedb-api.git"
-  revision "devstable"
+  revision "staging"
   action :sync
   enable_submodules true
   user "root"
@@ -11,6 +11,14 @@ end
 
 
 # Creates log and cache dirs for the Kohana project.
+
+
+directory "/var/www/wineapi" do
+  recursive true
+  owner "www-data"
+  group "www-data"
+  mode "755"
+end
 
 directory "/var/www/wineapi/application/logs" do
   recursive true
@@ -25,4 +33,3 @@ directory "/var/www/wineapi/application/cache" do
   group "www-data"
   mode "777"
 end
-
