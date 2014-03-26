@@ -20,6 +20,10 @@ execute "a2enmod rewrite" do
    command "sudo a2enmod rewrite"
 end
 
+execute "a2enmod ssl" do
+  command "sudo a2enmod ssl"
+end
+
 sc = php_pear_channel "pear.symfony-project.com" do
  action :discover
 end
