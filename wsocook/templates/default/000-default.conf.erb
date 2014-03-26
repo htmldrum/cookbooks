@@ -1,44 +1,124 @@
+NameVirtualHost *:80
+NameVirtualHost *:443
+
+#<VirtualHost *:80>
+#        ServerName test.winespectator.com
+#        Redirect permanent / http://www.winespectator.com/
+#</VirtualHost>
+
 <VirtualHost *:80>
-  DocumentRoot /var/www/wso/web
-  Alias /sf /usr/share/php/data/symfony/web/sf
-  Alias /contentimage /Image_Store
-  Alias /Wine/Images/Graphics /Image_Store/wso
-  RewriteEngine On
+    ServerName  wsocook.winespectator.com
+    DocumentRoot /var/www/wso/web
+	Alias /sf /usr/share/php/data/symfony/web/sf
 
-  <Directory /var/www/web>
-    Options FollowSymLinks
-    AllowOverride None
-    Order allow,deny
-    Allow from all
-  </Directory>
+        # for pushing image fetches to Amazon S3/CDN
+        RewriteEngine On
+        RewriteRule ^/contentimage/(.*)//(.*) http://assets.winespectator.com/$1/$2 [L]
+        RewriteRule ^/contentimage/(.+) http://assets.winespectator.com/$1 [L]
+        RewriteRule ^/Wine/Images/Graphics/(.+) http://assets.winespectator.com/wso/$1 [L]
 
-  <Directory />
-    Options FollowSymLinks
-    AllowOverride None
-  </Directory>
+    <Directory /var/www/PROD/web>
+        Options FollowSymLinks
+        AllowOverride None
 
-  <Location /server-status>
-    SetHandler server-status
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^.* - [L]
 
-    Order Deny,Allow
-    Deny from all
-    Allow from 127.0.0.1
-  </Location>
+    # we skip all files with .something
+    # comment the following 3 lines to allow periods in routes
+    RewriteCond %{REQUEST_URI} \..+$
+    RewriteCond %{REQUEST_URI} !\.html$
+    RewriteRule .* - [L]
 
-  LogLevel info
-  ErrorLog /var/log/apache2/wso-error.log
-  CustomLog /var/log/apache2/wso-access.log combined
+    RewriteRule ^(.*)$ wso.php [QSA,L]
+    </Directory>
 
-  RewriteEngine On
-  RewriteLog /var/log/apache2/wso-rewrite.log
-  RewriteLogLevel 0
+    <Location />
+        Options FollowSymLinks
+    </Location>
 
-  # Canonical host,
-  RewriteCond %{HTTP_HOST}   !^ [NC]
-  RewriteCond %{HTTP_HOST}   !^$
-  RewriteRule ^/(.*)$        /$1 [L,R=301]
 
-  RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
-  RewriteCond %{SCRIPT_FILENAME} !maintenance.html
-  RewriteRule ^.*$ /system/maintenance.html [L]
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+
+    ErrorLog /var/log/apache2/wso-error.log
+    CustomLog /var/log/apache2/wso-access.log combined
+    ServerSignature Off
+
+    #Alias /contentimage /Image_Store
+    #Alias /Wine/Images/Graphics /Image_Store/wso
+
+    ErrorDocument 404 /wso.php
+
+    <IfModule mod_deflate.c>
+          AddOutputFilterByType DEFLATE text/html text/plain text/xml
+    </IfModule>
+
+</VirtualHost>
+
+<VirtualHost *:443>
+        ServerName wsocook.winespectator.com
+        DocumentRoot /var/www/wso/web
+
+        # for pushing image fetches to Amazon S3/CDN
+        RewriteEngine On
+        RewriteRule ^/contentimage/(.*)//(.*) http://assets.winespectator.com/$1/$2 [L]
+        RewriteRule ^/contentimage/(.+) http://assets.winespectator.com/$1 [L]
+        RewriteRule ^/Wine/Images/Graphics/(.+) http://assets.winespectator.com/wso/$1 [L]
+
+        <Directory /var/www/PROD/web>
+                Options FollowSymLinks
+                AllowOverride None
+
+            RewriteEngine On
+
+            # If we have request, and the file exists, then simply serve it up
+            RewriteCond %{REQUEST_FILENAME} -f
+            RewriteRule ^.* - [L]
+
+            # we skip all files with .something
+            # comment the following 3 lines to allow periods in routes
+            RewriteCond %{REQUEST_URI} \..+$
+            RewriteCond %{REQUEST_URI} !\.html$
+            RewriteRule .* - [L]
+
+
+            RewriteRule ^(.*)$ wso.php [QSA,L]
+
+        </Directory>
+
+        <Location />
+                Options FollowSymLinks
+        </Location>
+
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+
+        ErrorLog /var/log/apache2/wso-error.log
+        CustomLog /var/log/apache2/wso-access.log combined
+        ServerSignature Off
+
+
+        ###
+        #    Directory Aliases
+    	##
+        #Alias /contentimage /Image_Store
+        #Alias /Wine/Images/Graphics /Image_Store/wso
+
+        ###
+        # SSL HERE
+        ###
+
+        SSLEngine On
+        SSLCertificateFile /etc/apache2/ssl/new.www.winespectator.com.crt
+        SSLCertificateKeyFile /etc/apache2/ssl/private-key.key
+        SSLCACertificateFile /etc/apache2/ssl/new.intermediate.crt
+
+
+    ErrorDocument 404 /wso.php
+
 </VirtualHost>
