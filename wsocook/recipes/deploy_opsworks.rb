@@ -5,6 +5,7 @@ template "/etc/apache2/sites-enabled/000-default" do
   mode "644"
 end
 
+node[:deploy].each do |application, deploy|
 template "/etc/apache2/ssl/winespectator_com.crt" do
   mode 0600
   source 'ssl.key.erb'
@@ -31,7 +32,8 @@ template "/etc/apache2/ssl/winespectator_com.ca" do
     deploy[:ssl_support] && deploy[:ssl_certificate_ca]
   end
 end
-  
+end
+
 git "/var/www/wso/" do
   repository "git@github.com:mturro/wso.git"
   revision "wsocook"
