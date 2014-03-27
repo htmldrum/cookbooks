@@ -9,6 +9,11 @@ execute "a2enmod rewrite" do
  command "sudo a2enmod rewrite"
 end
 
+execute "a2enmod rewrite" do
+ command "sudo a2enmod ssl"
+end
+
 service "apache2" do
   action :restart
 end
+
