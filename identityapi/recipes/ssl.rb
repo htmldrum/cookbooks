@@ -1,3 +1,7 @@
+
+node[:deploy]
+
+
 template "/etc/apache2/ssl/cert.crt" do
     mode 0600
     source 'ssl.key.erb'
