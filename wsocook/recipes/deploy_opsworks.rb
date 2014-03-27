@@ -5,6 +5,33 @@ template "/etc/apache2/sites-enabled/000-default" do
   mode "644"
 end
 
+template "/etc/apache2/ssl/winespectator_com.crt" do
+  mode 0600
+  source 'ssl.key.erb'
+  variables :key => deploy[:ssl_certificate]
+  only_if do
+    deploy[:ssl_support]
+  end
+end
+
+template "/etc/apache2/ssl/winespectator_com.key" do
+  mode 0600
+  source 'ssl.key.erb'
+  variables :key => deploy[:ssl_certificate_key]
+  only_if do
+    deploy[:ssl_support]
+  end
+end
+
+template "/etc/apache2/ssl/winespectator_com.ca" do
+  mode 0600
+  source 'ssl.key.erb'
+  variables :key => deploy[:ssl_certificate_ca]
+  only_if do
+    deploy[:ssl_support] && deploy[:ssl_certificate_ca]
+  end
+end
+  
 git "/var/www/wso/" do
   repository "git@github.com:mturro/wso.git"
   revision "wsocook"
