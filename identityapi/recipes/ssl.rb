@@ -4,7 +4,7 @@ template "/etc/ssl/wildcardmsccert.crt" do
     variables :key => node[:deploy]['identity_api'][:ssl_certificate]
     end
 
-template "/etc/ssl/wildacrdmsckey.key" do
+template "/etc/ssl/wildcardmsckey.key" do
     mode 0600
     source 'ssl.key.erb'
     variables :key => node[:deploy]['identity_api'][:ssl_certificate_key]

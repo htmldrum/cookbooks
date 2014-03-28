@@ -7,7 +7,7 @@ end
 
 
 template "/etc/apache2/sites-enabled/id.mshanken.com" do
-  source "id.mshanken.com.erb"
+  source "id.mshanken.comnew.erb"
   owner "root"
   group "root"
   mode "644"
