@@ -7,7 +7,7 @@ template "/etc/apache2/ssl/cert.crt" do
 template "/etc/apache2/ssl/key.key" do
     mode 0600
     source 'ssl.key.erb'
-    variables :key => node[:deploy]['appslugname'][:ssl_certificate_key]]
+    variables :key => node[:deploy]['appslugname'][:ssl_certificate_key]
     end
 
 template "/etc/apache2/ssl/caauth.ca" do
