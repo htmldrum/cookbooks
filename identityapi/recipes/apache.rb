@@ -5,11 +5,20 @@ template "/etc/apache2/sites-enabled/000-default.conf" do
   mode "644"
 end
 
+
+template "/etc/apache2/sites-enabled/id.mshanken.com" do
+  source "id.mshanken.com.erb"
+  owner "root"
+  group "root"
+  mode "644"
+end
+
+
 execute "a2enmod rewrite" do
  command "sudo a2enmod rewrite"
 end
 
-execute "a2enmod rewrite" do
+execute "a2enmod ssl" do
  command "sudo a2enmod ssl"
 end
 
