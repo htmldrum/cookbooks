@@ -1,16 +1,16 @@
-template "/etc/apache2/ssl/cert.crt" do
+template "/etc/ssl/wildcardmsccert.crt" do
     mode 0600
     source 'ssl.key.erb'
     variables :key => node[:deploy]['identity_api'][:ssl_certificate]
     end
 
-template "/etc/apache2/ssl/key.key" do
+template "/etc/ssl/wildacrdmsckey.key" do
     mode 0600
     source 'ssl.key.erb'
     variables :key => node[:deploy]['identity_api'][:ssl_certificate_key]
     end
 
-template "/etc/apache2/ssl/caauth.ca" do
+template "/etc/ssl/godaddywildcardmsccaauth.ca" do
     mode 0600
     source 'ssl.key.erb'
     variables :key => node[:deploy]['identity_api'][:ssl_certificate_ca]
