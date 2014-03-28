@@ -105,10 +105,10 @@
         # SSL HERE
         ###
 
-        #SSLEngine On
-        #SSLCertificateFile /etc/ssl/new.www.winespectator.com.crt
-        #SSLCertificateKeyFile /etc/apache2/ssl/private-key.key
-        #SSLCACertificateFile /etc/apache2/ssl/new.intermediate.crt
+        SSLEngine On
+        SSLCertificateFile /etc/ssl/winespectator_com.crt
+        SSLCertificateKeyFile /etc/ssl/winespectator_com.key
+        SSLCACertificateFile /etc/apache2/ssl/winespectator_com.crt
 
 
     ErrorDocument 404 /wso.php
