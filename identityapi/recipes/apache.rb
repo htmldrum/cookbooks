@@ -1,8 +1,12 @@
-template "/etc/apache2/sites-enabled/000-default.conf" do
-  source "000-default.conf.erb"
-  owner "root"
-  group "root"
-  mode "644"
+#template "/etc/apache2/sites-enabled/000-default.conf" do
+#  source "000-default.conf.erb"
+#  owner "root"
+#  group "root"
+#  mode "644"
+#end
+
+execute "a2dissite default0000" do
+ command "sudo a2dissite 000-default.conf"
 end
 
 execute "a2enmod ssl" do
