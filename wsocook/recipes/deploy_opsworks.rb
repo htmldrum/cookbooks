@@ -6,7 +6,7 @@ template "/etc/apache2/sites-enabled/000-default" do
 end
 
 node[:deploy].each do |application, deploy|
-template "/etc/apache2/ssl/winespectator_com.crt" do
+template "/etc/ssl/winespectator_com.crt" do
   mode 0600
   source 'ssl.key.erb'
   variables :key => deploy[:ssl_certificate]
@@ -15,7 +15,7 @@ template "/etc/apache2/ssl/winespectator_com.crt" do
   end
 end
 
-template "/etc/apache2/ssl/winespectator_com.key" do
+template "/etc/ssl/winespectator_com.key" do
   mode 0600
   source 'ssl.key.erb'
   variables :key => deploy[:ssl_certificate_key]
@@ -24,7 +24,7 @@ template "/etc/apache2/ssl/winespectator_com.key" do
   end
 end
 
-template "/etc/apache2/ssl/winespectator_com.ca" do
+template "/etc/ssl/winespectator_com.ca" do
   mode 0600
   source 'ssl.key.erb'
   variables :key => deploy[:ssl_certificate_ca]
