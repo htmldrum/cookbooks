@@ -24,6 +24,20 @@ template "/etc/apache2/sites-enabled/default-ssl.conf" do
   mode "644"
 end
 
+template "/etc/apache2/ports.conf" do
+  source "ports.conf.erb"
+  owner "root"
+  group "root"
+  mode "644"
+end
+
+template "/etc/apache2/apache2.conf" do
+  source "apache2.conf.erb"
+  owner "root"
+  group "root"
+  mode "644"
+end
+
 execute "a2enmod rewrite" do
  command "sudo a2enmod rewrite"
 end
