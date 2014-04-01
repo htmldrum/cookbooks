@@ -5,6 +5,14 @@ template "/etc/apache2/sites-enabled/000-default" do
   mode "644"
 end
 
+db = data_bag_item("wso", "sandbox_dburi")
+uri = db['dburi']
+
+template "/var/www/wso/lib/SysConfig.config.php" do
+  source "SysConfig.config.php.erb"
+  variables :dburi => uri
+end
+
 node[:deploy].each do |application, deploy|
 template "/etc/ssl/winespectator_com.crt" do
   mode 0600
