@@ -1,10 +1,3 @@
-template "/etc/apache2/sites-enabled/000-default" do
-    source "000-default.conf.erb"
-    owner "root"
-    group "root"
-    mode "644"
-end
-
 %w{/var/www/wso/cache /var/www/wso/log /var/www/wso/content-cache}.each do |mkdir|
   directory mkdir do
     mode 0777
