@@ -20,6 +20,14 @@ bash "fix symfony permissions" do
   EOH
 end
 
+db = data_bag_item("wso", "sandbox_dburi")
+uri = db['dburi']
+
+template "/var/www/wso/lib/SysConfig.config.php" do
+  source "SysConfig.config.php.erb"
+  variables :dburi => uri
+end
+
 service "apache2" do
   action :restart
 end
