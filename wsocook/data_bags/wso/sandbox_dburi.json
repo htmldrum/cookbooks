@@ -1,0 +1,4 @@
+{
+  "id": "sandbox_dburi",
+  "dburi": "mysql://rtuser:rtuser@symfonysandbox.chqvualwh4wy.us-east-1.rds.amazonaws.com/masterdb"
+}
