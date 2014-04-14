@@ -2,14 +2,6 @@ template "/etc/apache2/sites-enabled/default" do
     source "default.erb"
 end
 
-remote_file "Copy aws config  file" do
-  path "/usr/share/php/AWSSDKforPHP/config.inc.php"
-  source "file:///var/www/data/config.inc.php"
-  owner 'root'
-  group 'root'
-  mode 0755
-end
-
 %w{/var/www/cache /var/www/log /var/www/content-cache}.each do |mkdir|
   directory mkdir do
     mode 0777
