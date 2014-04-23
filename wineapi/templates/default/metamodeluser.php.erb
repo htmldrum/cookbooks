@@ -1,0 +1,21 @@
+<?php defined('SYSPATH') or die('No direct access allowed.');
+
+return array
+(
+    'active' => true, // turns on all checks in route filter
+    'oauth' => array(
+        'allow_http' => false,
+        'cache_host' => 'ec2-54-83-201-4.compute-1.amazonaws.com',
+        'cache_port' => 11211,
+        'api_name' => '',
+        'nonce_time_limit' => 60,
+    ),
+    'test' => array(
+        'oauth_domain' => '',
+        'consumer_key' => '',
+        'consumer_secret' => '',
+        'user_email' => '',
+        'user_password' => '',
+        'cookie_path' => APPPATH.'/cache/curlcookie',
+    ),
+);
