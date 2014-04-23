@@ -2,20 +2,20 @@
 
 return array
 (
-    'active' => true, // turns on all checks in route filter
-    'oauth' => array(
-        'allow_http' => false,
-        'cache_host' => 'ec2-54-83-201-4.compute-1.amazonaws.com',
-        'cache_port' => 11211,
-        'api_name' => '',
-        'nonce_time_limit' => 60,
-    ),
-    'test' => array(
-        'oauth_domain' => '',
-        'consumer_key' => '',
-        'consumer_secret' => '',
-        'user_email' => '',
-        'user_password' => '',
-        'cookie_path' => APPPATH.'/cache/curlcookie',
-    ),
+    'active' => true, // turns on all checks in route filter
+    'oauth' => array(
+        'allow_http' => true,
+        'cache_host' => 'ec2-54-83-201-4.compute-1.amazonaws.com',
+        'cache_port' => 11211,
+        'api_name' => 'wine',
+        'nonce_time_limit' => 60,
+    ),
+    'test' => array(
+        'oauth_domain' => 'https://ysilbermintz.id-preview.newdev.mshanken.com',
+        'consumer_key' => 'a02c99c3-2533-40c5-add1-5390a9de6f52',
+        'consumer_secret' => 'vkyY2Dimjjj1s8M4VegZIB6SJSTKjkQF',
+        'user_email' => 'winetestuser@example.com',
+        'user_password' => 'x2X524fh$O1yiaA',
+        'cookie_path' => '/tmp/dchan-devstable-curlcookie',
+    ),
 );

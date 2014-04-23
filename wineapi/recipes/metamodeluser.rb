@@ -1,4 +1,4 @@
-template "/var/www/wineapi/application/config/metmodeluser.php" do
+template "/var/www/wineapi/application/config/metamodeluser.php" do
   source "metamodeluser.php.erb"
   owner "root"
   group "root"
