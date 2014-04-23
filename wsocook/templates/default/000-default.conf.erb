@@ -1,0 +1,118 @@
+<VirtualHost *:80>
+	ServerName  www.winespectator.com
+  ServerAlias wsocook.winespectator.com
+  DocumentRoot /var/www/wso/web
+	Alias /sf /usr/share/php/data/symfony/web/sf
+
+        # for pushing image fetches to Amazon S3/CDN
+        RewriteEngine On
+        RewriteRule ^/contentimage/(.*)//(.*) http://assets.winespectator.com/$1/$2 [L]
+        RewriteRule ^/contentimage/(.+) http://assets.winespectator.com/$1 [L]
+        RewriteRule ^/Wine/Images/Graphics/(.+) http://assets.winespectator.com/wso/$1 [L]
+
+    <Directory /var/www/wso/web>
+        Options FollowSymLinks
+        AllowOverride None
+
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^.* - [L]
+
+    # we skip all files with .something
+    # comment the following 3 lines to allow periods in routes
+    RewriteCond %{REQUEST_URI} \..+$
+    RewriteCond %{REQUEST_URI} !\.html$
+    RewriteRule .* - [L]
+
+    RewriteRule ^(.*)$ wso.php [QSA,L]
+    </Directory>
+
+    <Location />
+        Options FollowSymLinks
+    </Location>
+
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+
+    ErrorLog /var/log/apache2/wso-error.log
+    CustomLog /var/log/apache2/wso-access.log combined
+    ServerSignature Off
+
+    #Alias /contentimage /Image_Store
+    #Alias /Wine/Images/Graphics /Image_Store/wso
+
+    ErrorDocument 404 /wso.php
+
+    <IfModule mod_deflate.c>
+          AddOutputFilterByType DEFLATE text/html text/plain text/xml
+    </IfModule>
+
+</VirtualHost>
+
+<VirtualHost *:443>
+        ServerName www.winespectator.com
+        ServerAlias wsocook.winespectator.com
+        DocumentRoot /var/www/wso/web
+
+        # for pushing image fetches to Amazon S3/CDN
+        RewriteEngine On
+        RewriteRule ^/contentimage/(.*)//(.*) http://assets.winespectator.com/$1/$2 [L]
+        RewriteRule ^/contentimage/(.+) http://assets.winespectator.com/$1 [L]
+        RewriteRule ^/Wine/Images/Graphics/(.+) http://assets.winespectator.com/wso/$1 [L]
+
+        <Directory /var/www/wso/web>
+                Options FollowSymLinks
+                AllowOverride None
+
+            RewriteEngine On
+
+            # If we have request, and the file exists, then simply serve it up
+            RewriteCond %{REQUEST_FILENAME} -f
+            RewriteRule ^.* - [L]
+
+            # we skip all files with .something
+            # comment the following 3 lines to allow periods in routes
+            RewriteCond %{REQUEST_URI} \..+$
+            RewriteCond %{REQUEST_URI} !\.html$
+            RewriteRule .* - [L]
+
+
+            RewriteRule ^(.*)$ wso.php [QSA,L]
+
+        </Directory>
+
+        <Location />
+                Options FollowSymLinks
+        </Location>
+
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+
+        ErrorLog /var/log/apache2/wso-error.log
+        CustomLog /var/log/apache2/wso-access.log combined
+        ServerSignature Off
+
+
+        ###
+        #    Directory Aliases
+    	##
+        #Alias /contentimage /Image_Store
+        #Alias /Wine/Images/Graphics /Image_Store/wso
+
+        ###
+        # SSL HERE
+        ###
+
+        SSLEngine On
+        SSLCertificateFile /etc/ssl/winespectator_com.crt
+        SSLCertificateKeyFile /etc/ssl/winespectator_com.key
+        SSLCACertificateFile /etc/ssl/winespectator_com.crt
+
+
+    ErrorDocument 404 /wso.php
+
+</VirtualHost>
