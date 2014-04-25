@@ -1,0 +1,39 @@
+<?php
+
+return array
+(
+    // see http://semver.org/
+    // format is show.major.minor.revision
+    // show number is just for show, updated for business reasons
+    // major numbers reflect backwards incompatability in public API
+    // minor numbers reflect backwards compatable features added
+    // revision numbers are incremented every update for bug fixes
+    'api_version' => '1.2.2.8',
+
+    // enable apc page cache
+    'cache' => array(
+        'enabled' => true,
+        'ttl' => 86400,
+    ),
+
+    // allow sdk generator and auto doc routes
+    // enable /discover routes including sdk generator
+    'discoverable' => true,
+
+    // outputs
+    'unittest_output_directory' => __DIR__ . '/../test/api/',
+    'sdk_output_directory' => __DIR__ . '/../classes/',
+
+    // additional debugging stanza added to output
+    'debug_enabled' => false,
+
+    // allow sdk generator and auto doc routes
+    'discoverable' => true,
+    
+    'targets' => array(
+        'Target_Cloudsearch',
+        'Target_Pgsql',
+    ),
+
+
+);
