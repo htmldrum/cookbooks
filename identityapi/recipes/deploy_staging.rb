@@ -70,3 +70,12 @@ template "/var/www/identity/application/config/test.php" do
   group "root"
   mode "644"
 end
+
+#Adding minion subscription checking crontab
+
+cron "minion subscription tasks checker" do
+  minute "7"
+  day "*"
+  command "/var/www/identity/tools/minion checkreceipts"
+  action :create
+end
