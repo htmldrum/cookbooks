@@ -77,5 +77,5 @@ cron "minion subscription tasks checker" do
   minute "7"
   day "*"
   command "/var/www/identity/tools/minion checkreceipts"
-  action: create
+  action :create
 end
