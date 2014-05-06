@@ -3,7 +3,6 @@ git "/var/www/wineapi/" do
   repository "git@github.com:mshanken/winedb-api.git"
   revision "master"
   action :sync
-  enable_submodules true
   user "root"
   group "root"
 end
@@ -32,4 +31,18 @@ directory "/var/www/wineapi/application/cache" do
   owner "www-data"
   group "www-data"
   mode "777"
+end
+
+#
+# Taken from:
+# http://docs.aws.amazon.com/opsworks/latest/userguide/gettingstarted.walkthrough.photoapp.3.html
+#
+script "install_composer" do
+  interpreter "bash"
+  user "root"
+  cwd "/var/www/wineapi"
+  code <<-EOH
+  curl -s https://getcomposer.org/installer | php
+  php composer.phar install --no-dev --no-interaction --optimize-autoloader
+  EOH
 end

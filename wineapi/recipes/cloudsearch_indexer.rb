@@ -5,7 +5,7 @@ template "/var/www/wineapi/application/config/cloudsearch.php" do
   mode "644"
 end
 
-execute "cloud search json WGET" do    
+execute "cloud search json WGET" do
   command "wget --output-document=/tmp/csfile --no-check-certificate https://wineapi.mshanken.com/discover/cloudsearch/domain/production`date +%Y%m%d`"
   action :run
 end
