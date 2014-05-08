@@ -1,7 +1,7 @@
 # Deploys the given git project to the deploy directory.
 git "/var/www/wineapi/" do
   repository "git@github.com:mshanken/winedb-api.git"
-  revision "v1.2.2.8"
+  revision "v1.2.3.2"
   action :sync
   user "root"
   group "root"
