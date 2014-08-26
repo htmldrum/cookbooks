@@ -11,7 +11,7 @@ end
 script "install_npm_dependencies" do
   interpreter "bash"
   user "root"
-  cwd "/srv/www/wrdpress/current/wp-content"
+  cwd "/srv/www/wordpress/current/wp-content"
   code <<-EOH
   npm install && bower install && gulp
   EOH
