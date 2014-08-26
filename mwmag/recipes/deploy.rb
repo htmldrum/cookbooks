@@ -1,7 +1,7 @@
 # Deploys the given git project to the deploy directory.
 git "/srv/www/wordpress/current/wp-content" do
   repository "git@github.com:mshanken/mwmag.git"
-  revision "prod"
+  revision "master"
   action :sync
   user "root"
   group "root"
