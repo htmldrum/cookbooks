@@ -1,10 +1,20 @@
 # Deploys the given git project to the deploy directory.
-git "/srv/www/wordpress/current/wp-content" do
+git "/tmp/" do
   repository "git@github.com:mshanken/mwmag.git"
   revision "prod"
   action :sync
   user "root"
   group "root"
+end
+
+# Running an rsync to install the wp-content directory
+script "run rsync" do
+  interpreter "bash"
+  user "root"
+  cwd "/tmp/mwmag/"
+  code <<-EOH
+  rsync -rtv ./ /srv/www/wordpress/current/wp-content/
+  EOH
 end
 
 # Running dependency isntalls.
