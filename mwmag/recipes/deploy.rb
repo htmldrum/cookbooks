@@ -1,11 +1,22 @@
+#Makes a Deploy directory.
+directory "/tmp/mwmag/" do
+  owner "root"
+  group "root"
+  mode 00644
+  action :create
+end
+
+
+
 # Deploys the given git project to the deploy directory.
-git "/tmp/" do
+git "/tmp/mwmag" do
   repository "git@github.com:mshanken/mwmag.git"
   revision "master"
   action :sync
   user "root"
   group "root"
 end
+
 
 # Running an rsync to install the wp-content directory
 script "run rsync" do
