@@ -31,21 +31,21 @@ end
 
 # Adding proper node verson ppa.
 execute "addapt" do
-	command "add-apt-repository ppa:chris-lea/node.js -y"
+	command "sudo add-apt-repository ppa:chris-lea/node.js -y"
 	action :run
 end
 
 
 # Updating aptitude.
 execute "update" do
-        command "apt-get update"
+        command "sudo apt-get update"
         action :run
 end
 
 
 # Finally isntallign nodejs...
 execute "install nodejs" do
-        command "apt-get install nodejs"
+        command "sudo apt-get install nodejs -y"
         action :run
 end
 
