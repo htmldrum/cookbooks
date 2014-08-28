@@ -31,7 +31,7 @@ end
 
 # Adding proper node verson ppa.
 execute "addapt" do
-	command "sudo add-apt-repository ppa:chris-lea/node.js -y"
+	command "sudo add-apt-repository -y ppa:chris-lea/node.js"
 	action :run
 end
 
@@ -45,7 +45,7 @@ end
 
 # Finally isntallign nodejs...
 execute "install nodejs" do
-        command "sudo apt-get install nodejs -y"
+        command "sudo apt-get -y install nodejs"
         action :run
 end
 
@@ -56,7 +56,7 @@ script "install_npm_dependencies" do
   user "root"
   cwd "/srv/www/wordpress/current/wp-content"
   code <<-EOH
-  npm install && npm install bower && bower install --allow-root && npm install gulp
+  npm install && npm install -g  bower && bower install --allow-root --quiet --silent && npm install gulp
   EOH
 end
 
