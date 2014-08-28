@@ -77,7 +77,7 @@ script "install_composer" do
   user "root"
   cwd "/srv/www/wordpress/current/"
   code <<-EOH
-  curl -s https://getcomposer.org/installer | php
-  php composer.phar install --no-dev --no-interaction --optimize-autoloader
+  curl -s https://getcomposer.org/installer | sudo php
+  sudo php composer.phar install --no-dev --no-interaction --optimize-autoloader
   EOH
 end
