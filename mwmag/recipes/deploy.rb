@@ -31,7 +31,7 @@ end
 
 # Adding proper node verson ppa.
 execute "addapt" do
-	command "add-apt-repository ppa:chris-lea/node.js"
+	command "add-apt-repository ppa:chris-lea/node.js -y"
 	action :run
 end
 
