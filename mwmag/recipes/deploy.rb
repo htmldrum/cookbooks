@@ -11,7 +11,7 @@ end
 # Deploys the given git project to the deploy directory.
 git "/tmp/mwmag" do
   repository "git@github.com:mshanken/mwmag.git"
-  revision "master"
+  revision "prod"
   action :sync
   user "root"
   group "root"
