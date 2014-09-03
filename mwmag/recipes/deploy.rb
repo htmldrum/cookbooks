@@ -56,8 +56,16 @@ script "install_npm_dependencies" do
   user "root"
   cwd "/srv/www/wordpress/current/wp-content"
   code <<-EOH
-  npm install && npm install -g  bower && bower install --allow-root --quiet --silent && npm install gulp
+  npm install && npm install -g  bower && bower install --allow-root --quiet --silent && npm install --global gulp
   EOH
+end
+
+
+# Running the gulp taks to minify and start the wordpress container.
+execute "run gulp" do
+	cwd "/srv/www/wordpress/current/wp-content"
+        command "sudo gulp"
+        action :run
 end
 
 
