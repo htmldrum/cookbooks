@@ -26,7 +26,17 @@ end
 # Adds oauth support.
 
 execute "install oauth"  do
-	command "pecl install oauth && service apachectl graceful"
+	command "pecl install oauth"
 	action :run
+end
+
+# Enables oauth module.
+
+script "amend php.ini" do
+  interpreter "bash"
+  user "root"
+  code <<-EOH
+  echo "extension=oauth.so" >> /etc/php5/apache2/conf.d/php.ini && service apache2 restart
+  EOH
 end
 
