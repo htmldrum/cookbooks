@@ -23,3 +23,10 @@ directory "/srv/www/wheretosmokeapi/current/application/cache" do
   mode "777"
 end
 
+# Adds oauth support.
+
+execute "install oauth"  do
+	command "pecl install oauth && service apachectl graceful"
+	action :run
+end
+
