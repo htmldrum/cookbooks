@@ -36,7 +36,7 @@ script "amend php.ini" do
   interpreter "bash"
   user "root"
   code <<-EOH
-  echo "extension=oauth.so" >> /etc/php5/apache2/conf.d/php.ini && service apache2 restart
+  echo "extension=oauth.so" >> /etc/php5/apache2/php.ini && service apache2 restart
   EOH
 end
 
