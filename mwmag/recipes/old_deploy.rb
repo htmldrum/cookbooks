@@ -7,14 +7,6 @@ directory "/tmp/mwmag/" do
 end
 
 
-# Makes a theme Deploy directory.
-directory "/srv/www/wordpress/current/wp-content/themes/marketwatch/" do
-  owner "root"
-  group "root"
-  mode 00644
-  action :create
-end
-
 
 # Deploys the given git project to the deploy directory.
 git "/tmp/mwmag" do
@@ -32,8 +24,48 @@ script "run rsync" do
   user "root"
   cwd "/tmp/mwmag/"
   code <<-EOH
-  rsync -rtv ./ /srv/www/wordpress/current/wp-content/themes/marketwatch/
+  rsync -rtv ./ /srv/www/wordpress/current/wp-content/
   EOH
+end
+
+
+# Adding proper node verson ppa.
+execute "addapt" do
+	command "sudo add-apt-repository -y ppa:chris-lea/node.js"
+	action :run
+end
+
+
+# Updating aptitude.
+execute "update" do
+        command "sudo apt-get update"
+        action :run
+end
+
+
+# Finally isntallign nodejs...
+execute "install nodejs" do
+        command "sudo apt-get -y install nodejs"
+        action :run
+end
+
+
+# Running dependency installs.
+script "install_npm_dependencies" do
+  interpreter "bash"
+  user "root"
+  cwd "/srv/www/wordpress/current/wp-content"
+  code <<-EOH
+  npm install && npm install -g  bower && bower install --allow-root --quiet --silent && npm install --global gulp
+  EOH
+end
+
+
+# Running the gulp taks to minify and start the wordpress container.
+execute "run gulp" do
+	cwd "/srv/www/wordpress/current/wp-content"
+        command "sudo gulp"
+        action :run
 end
 
 
