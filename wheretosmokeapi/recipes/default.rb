@@ -26,7 +26,7 @@ end
 # Adds oauth support.
 
 execute "install oauth"  do
-	command "pecl install oauth"
+	command "sudo pecl install oauth"
 	action :run
 end
 
