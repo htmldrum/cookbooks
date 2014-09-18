@@ -2,7 +2,7 @@
 directory "/tmp/mwmag/" do
   owner "root"
   group "root"
-  mode 00644
+  mode 00755
   action :create
 end
 
@@ -11,7 +11,7 @@ end
 directory "/srv/www/wordpress/current/wp-content/themes/marketwatch/" do
   owner "root"
   group "root"
-  mode 00644
+  mode 00755
   action :create
 end
 
