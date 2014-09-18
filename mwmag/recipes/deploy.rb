@@ -2,7 +2,8 @@
 directory "/tmp/mwmag/" do
   owner "root"
   group "root"
-  mode 00755
+  mode 0755
+  recursive true
   action :create
 end
 
@@ -11,7 +12,8 @@ end
 directory "/srv/www/wordpress/current/wp-content/themes/marketwatch/" do
   owner "root"
   group "root"
-  mode 00755
+  mode 0755
+  recursive true
   action :create
 end
 
@@ -32,7 +34,7 @@ script "run rsync" do
   user "root"
   cwd "/tmp/mwmag/"
   code <<-EOH
-  rsync -rtv ./ /srv/www/wordpress/current/wp-content/themes/marketwatch/
+  rsync -atv ./ /srv/www/wordpress/current/wp-content/themes/marketwatch/
   EOH
 end
 
