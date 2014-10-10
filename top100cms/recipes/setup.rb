@@ -37,3 +37,37 @@ script "install_composer" do
   sudo php composer.phar install --no-dev --no-interaction --optimize-autoloader
   EOH
 end
+
+
+# Installing static-press by hand since it is incompatible with composer.
+execute "install static-press"  do
+  cwd "/srv/www/wordpress/current/wp-content/plugins/"
+  command "sudo wget https://downloads.wordpress.org/plugin/staticpress.0.4.3.5.zip && sudo unzip staticpress.0.4.3.5.zip"
+  action :run
+end
+
+
+# Now adding the static html output directory for static-press plugin conifguration.
+directory "/srv/www/wordpress/current/static_output/" do
+  owner "root"
+  group "root"
+  mode 0755
+  recursive true
+  action :create
+end
+
+
+# Installing s3cmd CLI tool for syncing static content to s3.
+execute "install s3cmd" do
+  command "sudo apt-get install -y s3cmd"
+  action :run
+end
+
+
+# Adding an s3cmd config file.
+template "/home/ubuntu/.s3cfg" do
+  source ".s3cfg.erb"
+  owner "root"
+  group "root"
+  mode "644"
+end
