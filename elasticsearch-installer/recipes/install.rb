@@ -13,7 +13,7 @@
 #Install the ORACLE jre environment for elasticsearch.
 
 execute "install ORACLE java" do
-	command "sudo add-apt-repository -y ppa:webupd8team/java && sudo apt-get update && sudo apt-get -y install oracle-java7-installer oracle-java7-set-default"
+	command "sudo add-apt-repository -y ppa:webupd8team/java && sudo apt-get update && sudo echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections && sudo echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections && sudo apt-get -y install oracle-java7-installer oracle-java7-set-default"
 	action :run
 end
 
