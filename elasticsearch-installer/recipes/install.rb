@@ -33,3 +33,11 @@ execute "install with dpkg" do
         command "sudo dpkg -i elasticsearch-1.3.2.deb"
         action :run
 end
+
+
+#Enabling elastic search to start
+
+execute "start elasticsearch" do
+        command "sudo service elasticsearch start"
+        action :run
+end
