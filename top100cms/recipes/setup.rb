@@ -72,8 +72,8 @@ end
 
 # Now adding the static html output directory for static-press plugin conifguration.
 directory "/srv/www/wordpress/current/static_output/" do
-  owner "root"
-  group "root"
+  owner "www-data"
+  group "www-data"
   mode 0755
   recursive true
   action :create
