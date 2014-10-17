@@ -17,6 +17,29 @@ directory "/srv/www/wordpress/current/wp-content/themes/top100/" do
   action :create
 end
 
+
+# Grab the code for the theme from github.
+git "/tmp/wsot100" do
+  repository "git@github.com:mshanken/Top100.git"
+  revision "master"
+  action :sync
+  user "www-data"
+  group "www-data"
+end
+
+
+# Rsync that theme over to the install dir.
+
+script "run rsync" do
+  interpreter "bash"
+  user "root"
+  cwd "/tmp/wsot100/"
+  code <<-EOH
+  rsync -atv ./ /srv/www/wordpress/current/wp-content/themes/top100/
+  EOH
+end
+
+
 # Adding composer'd plugins via template file.
 template "/srv/www/wordpress/current/composer.json" do
   source "composer.json.erb"
