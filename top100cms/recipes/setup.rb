@@ -23,8 +23,8 @@ git "/tmp/wsot100" do
   repository "git@github.com:mshanken/Top100.git"
   revision "master"
   action :sync
-  user "www-data"
-  group "www-data"
+  user "root"
+  group "root"
 end
 
 
