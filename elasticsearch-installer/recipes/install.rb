@@ -14,6 +14,7 @@
 - Start procedure
   - rl3 ( just run as configure step )
   - install
+    - Opsworks-flavored Ubuntu (12.04, 64b ) - http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box
     - Rails
     - Ruby
     - Elasticsearch
