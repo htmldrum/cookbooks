@@ -3,12 +3,40 @@
 # Recipe:: default
 #
 # Copyright 2014, M. Shanken Communications
-# Author: Sergey Zhukov
-# szhukov@mshanken.com
+# Author: Sergey Zhukov <szhukov@mshanken.com>, James Meldrum
+#         <jmeldrum@mshanken.com>
 #
 # All rights reserved - Do Not Redistribute
 #
+#
 
+=begin
+- Start procedure
+  - rl3 ( just run as configure step )
+  - install
+    - Rails
+    - Ruby
+    - Elasticsearch
+    - PG
+    - Gems: bundle install
+  - tasks
+    - scraper
+    - indexers
+    - start web server
+  - services
+    - elasticsearch
+    - pg
+    - rails (via nginx)
+    - sidekiq
+=end
+
+# Install
+  # OS + build tools
+  # Ruby
+  # Rails
+  # Elasticsearch
+  # PG
+  # Gemfile
 
 #Install the ORACLE jre environment for elasticsearch.
 

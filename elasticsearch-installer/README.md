@@ -1,10 +1,10 @@
 # elasticsearch-installer-cookbook
 
-TODO: Enter the cookbook description here.
+Deploy cookbook for the Elasticsearch API
 
 ## Supported Platforms
 
-TODO: List your supported platforms.
+Ubuntu 12.04
 
 ## Attributes
 
@@ -48,4 +48,24 @@ Include `elasticsearch-installer` in your node's `run_list`:
 
 ## License and Authors
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: James Meldrum (<jmeldrum@mshanken.com>)
+
+## TODO:
+- Start procedure
+  - rl3
+  - install
+    - Ubuntu ( 12.04, 64b )
+    - Rails (4.1.5)
+    - Ruby (2.1.2)
+    - Elasticsearch (1.3.2)
+    - PG (9.3.4)
+    - Gems: bundle install
+  - tasks
+    - scraper
+    - indexers
+    - start web server
+  - services
+    - elasticsearch
+    - pg
+    - rails (via nginx)
+    - sidekiq ( from Gemfile, needs to be started by executing `bundle exec sidekiq --queue elasticsearch` )
