@@ -94,3 +94,14 @@ template "/home/ubuntu/.s3cfg" do
   group "root"
   mode "644"
 end
+
+
+# Make the php upload size coreect via the means of .htaccess file.
+script "PHP MAX UPLOAD SIZE" do
+  interpreter "bash"
+  user "root"
+  cwd "/srv/www/wordpress/current"
+  code <<-EOH
+  echo "php_value upload_max_filesize 64M php_value post_max_size 64M php_value max_execution_time 300 php_value max_input_time 300" >> .htaccess
+  EOH
+end
