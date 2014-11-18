@@ -8,7 +8,7 @@
 #
 
 
-git "/srv/www/managewine/current/" do
+git "/srv/www/" do
   repository "git@github.com:rjowens/rails-4-vagrant.git"
   revision "master"
   action :sync
@@ -20,7 +20,7 @@ end
 script "get_env_vars" do
   interpreter "bash"
   user "root"
-  cwd "/srv/www/managewine/current/"
+  cwd "/srv/www/"
   code <<-EOH
   source . .env
   EOH
@@ -30,7 +30,7 @@ end
 script "provision project" do
   interpreter "bash"
   user "root"
-  cwd "/srv/www/managewine/current/"
+  cwd "/srv/www/"
   code <<-EOH
   ./provision.sh
   EOH
