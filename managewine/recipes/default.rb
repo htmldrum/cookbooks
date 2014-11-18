@@ -32,6 +32,6 @@ script "provision project" do
   user "root"
   cwd "/srv/www/"
   code <<-EOH
-  ./provision.sh
+  sudo ./provision.sh
   EOH
 end
