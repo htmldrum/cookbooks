@@ -14,8 +14,7 @@ git "/srv/www/managewine/current/" do
   action :sync
   user "root"
   group "root"
-
-
+end
 
 
 script "get_env_vars" do
