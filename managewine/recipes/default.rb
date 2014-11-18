@@ -22,7 +22,7 @@ script "get_env_vars" do
   user "root"
   cwd "/srv/www/"
   code <<-EOH
-  source . .env
+  source .env
   EOH
 end
 
