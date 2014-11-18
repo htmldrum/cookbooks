@@ -7,6 +7,17 @@
 # All rights reserved - Do Not Redistribute
 #
 
+
+git "/srv/www/managewine/current/" do
+  repository "git@github.com:rjowens/rails-4-vagrant.git"
+  revision "master"
+  action :sync
+  user "root"
+  group "root"
+
+
+
+
 script "get_env_vars" do
   interpreter "bash"
   user "root"
