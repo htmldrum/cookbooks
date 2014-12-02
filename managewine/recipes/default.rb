@@ -27,6 +27,10 @@ script "get_env_vars" do
 end
 
 
+file "/srv/www/provision.sh" do
+  mode '0777'
+end
+
 script "provision project" do
   interpreter "bash"
   user "root"
