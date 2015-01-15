@@ -63,6 +63,11 @@ execute "install with dpkg" do
         action :run
 end
 
+execute "installing nodejs " do
+        cwd "/tmp"
+  	command "sudo apt-get -y install python-software-properties python && sudo add-apt-repository -y ppa:chris-lea/node.js && sudo apt-get update && sudo apt-get -y install nodejs"
+        action :run
+end
 
 #Enabling elastic search to start
 
