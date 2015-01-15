@@ -8,3 +8,4 @@
 #
 
 require_recipe 'sidekiq'
+require_recipe 'nodejs'

@@ -19,3 +19,6 @@
 [submodule "chef-solo-search"]
 	path = chef-solo-search
 	url = https://github.com/edelight/chef-solo-search.git
+[submodule "nodejs"]
+	path = nodejs
+	url = git@github.com:redguide/nodejs.git
