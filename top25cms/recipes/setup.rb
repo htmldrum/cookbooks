@@ -1,5 +1,5 @@
 # Makes a Deploy directory.
-directory "/tmp/wsot100/" do
+directory "/tmp/caoTop25/" do
   owner "root"
   group "root"
   mode 0755
@@ -9,7 +9,7 @@ end
 
 
 # Makes a theme Deploy directory.
-directory "/srv/www/wordpress/current/wp-content/themes/top100/" do
+directory "/srv/www/wordpress/current/wp-content/themes/caoTop25/" do
   owner "root"
   group "root"
   mode 0755
@@ -19,8 +19,8 @@ end
 
 
 # Grab the code for the theme from github.
-git "/tmp/wsot100" do
-  repository "git@github.com:mshanken/Top100.git"
+git "/tmp/caoTop25" do
+  repository "git@github.com:mshanken/caoTop25.git"
   revision "master"
   action :sync
   user "root"
@@ -33,9 +33,9 @@ end
 script "run rsync" do
   interpreter "bash"
   user "root"
-  cwd "/tmp/wsot100/"
+  cwd "/tmp/caoTop25/"
   code <<-EOH
-  rsync -atv ./ /srv/www/wordpress/current/wp-content/themes/top100/
+  rsync -atv ./ /srv/www/wordpress/current/wp-content/themes/caoTop25/
   EOH
 end
 
