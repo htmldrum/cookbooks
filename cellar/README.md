@@ -1,6 +1,6 @@
-# elasticsearch-installer-cookbook
+# cellar-cookbook
 
-Deploy cookbook for the Elasticsearch API
+Deploy cookbook for the Cellar application
 
 ## Supported Platforms
 
@@ -16,7 +16,7 @@ Ubuntu 12.04
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['elasticsearch-installer']['bacon']</tt></td>
+    <td><tt>['cellar']['bacon']</tt></td>
     <td>Boolean</td>
     <td>whether to include bacon</td>
     <td><tt>true</tt></td>
@@ -25,14 +25,14 @@ Ubuntu 12.04
 
 ## Usage
 
-### elasticsearch-installer::default
+### cellar::default
 
-Include `elasticsearch-installer` in your node's `run_list`:
+Include `cellar` in your node's `run_list`:
 
 ```json
 {
   "run_list": [
-    "recipe[elasticsearch-installer::default]"
+    "recipe[cellar::default]"
   ]
 }
 ```
@@ -49,23 +49,3 @@ Include `elasticsearch-installer` in your node's `run_list`:
 ## License and Authors
 
 Author:: James Meldrum (<jmeldrum@mshanken.com>)
-
-## TODO:
-- Start procedure
-  - rl3
-  - install
-    - Ubuntu ( 12.04, 64b )
-    - Rails (4.1.5)
-    - Ruby (2.1.2)
-    - Elasticsearch (1.3.2)
-    - PG (9.3.4)
-    - Gems: bundle install
-  - tasks
-    - scraper
-    - indexers
-    - start web server
-  - services
-    - elasticsearch
-    - pg
-    - rails (via nginx)
-    - sidekiq ( from Gemfile, needs to be started by executing `bundle exec sidekiq --queue elasticsearch` )
